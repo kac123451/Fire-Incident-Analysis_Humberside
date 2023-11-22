@@ -56,9 +56,21 @@ Close & Load data
 27 columns 175504 rows (4 738 605 records)
 
 
-Lets import data to Azure SQL Database
+
+Humberside Station Locations
+We don't have Authority which then we can use for reference, but we can use Link column which contains this information.
+
+Using =TEXTSPLIT(K2,"/")
+Copy & Paste values and we just need to do small corrections 
+
+=IF(L2 = "north-lincolnshire", "North Lincolshire", IF(L2 = "hull", "City Of Kingston Upon Hull", IF(L2 = "east-riding", "East Riding Of Yorkshire", IF(L2 = "north-east-lincolnshire", "North East Lincolnshire"))))
+
+Remove not needed columns and we are ready!
+
+Lets import data to SSMS SQL Server Management Studio
 
 
+Depends on Region From 68 to 80% Fire Causes are Unknown!
 
 
 
