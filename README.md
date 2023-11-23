@@ -1,6 +1,5 @@
 # Fire-Incident-Analysis_Humberside
 
-###In this analysis we will trying to answer these questions:
 
 - ***Causes of Fire - What are the primary causes of fire incidents in the community?***
 - ***Temporal Patterns - Are there specific days or times of the week when fire incidents are more likely to occur?***
@@ -17,7 +16,7 @@ Dataset can be found under this link
 [Humberside Dataset](https://data-humbersidefrs.opendata.arcgis.com/search)
 
 
-Screen1()
+
 
 **Dataset contains 36 columns and 175504 rows (4 816 651 records)**
 - **X**              - represent spatial coordinates x - easting
@@ -36,14 +35,14 @@ Screen1()
 - **LONGITUDE**               - corresponding geographic coordinates
 - **LATITUDE**               - corresponding geographic coordinates
 
-
 While the dataset appears sorted, it contains some blank records that warrant attention. To gain a comprehensive understanding of the data and facilitate effective analysis, we will transform the dataset into a structured table. Utilizing the Power Query Editor, we can delve deeper into the intricacies of the data.
 
-**Conversion to Table**               - facilites efficient data manipulation
-**Power Query Editor Exploration**    - gain insights into the dataset, ensuring a thorough examination of its contents
-**Column Optimization**               - remove columns that do not contribute significantly to our goals
 
-Columns Removed: Incident_Ref, Property_lvl_2, Property_lvl_3, Property_lvl_4, Property_lvl_5, SOA, OA, X_Easting, Y_Easting
+- **Conversion to Table**               - facilites efficient data manipulation
+- **Power Query Editor Exploration**    - gain insights into the dataset, ensuring a thorough examination of its contents
+- **Column Optimization**               - remove columns that do not contribute significantly to our goals
+- **Columns Removed**: Incident_Ref, Property_lvl_2, Property_lvl_3, Property_lvl_4, Property_lvl_5, SOA, OA, X_Easting, Y_Easting
+
 
 #### Null Value Handling:
 - Replace null values with "Unknown" in text columns to retain valuable information. **Note that "Fire_Cause" is not dataset-wide, and its percentage will be assessed separately.**
@@ -54,9 +53,15 @@ Columns Removed: Incident_Ref, Property_lvl_2, Property_lvl_3, Property_lvl_4, P
 - Ensure all changes align with data integrity standards.
 - Load Data: Once checks are completed, close and load the processed data.
 
-27 columns 175504 rows (4 738 605 records)
+
+
+- Number of Columns: 27
+- Number of Rows: 175,504 (4,738,605 records)
+
+
 
 Analysis (SQL)
+
 
 
 Key takeaways: [Visualisations](https://public.tableau.com/app/profile/kacper.sarwuta/viz/UKHumbersideIncidentFireIncidentAnalysis2009-Q32023/Dashboard1?publish=yes)
