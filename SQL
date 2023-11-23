@@ -1,0 +1,209 @@
+
+--- Update data
+SELECT * FROM Humberside;
+
+UPDATE Humberside
+SET Fire_Cause = 'Unknown'
+WHERE Fire_Cause = 'Not Known';
+
+UPDATE Humberside
+SET Fire_Cause = 'Unknown'
+WHERE Fire_Cause = 'Deliberate - Unknown Owner';
+
+---Cause of Fire - What are the primary causes of fire incidents in the community?
+
+
+---What % of all cases contains Fire_Cause description ?
+SELECT
+	Result,
+	COUNT(Result) * 100.0 / (SELECT COUNT(*) FROM Humberside WHERE Inc_Type = 'Fire') as Percentage
+FROM (
+	SELECT 
+		Fire_Cause,
+		CASE WHEN
+		Fire_Cause = 'Unknown' THEN 'Without Cause' ELSE 'With Cause' END AS Result
+	FROM
+		Humberside
+	WHERE
+		Inc_Type = 'Fire') AS SubqueryAlias
+GROUP BY
+	Result;
+
+
+
+--- v2 By Authority
+SELECT
+	Authority,
+	Result,
+	COUNT(Result),
+	COUNT(Result) * 100.0 / SUM(COUNT(Result)) OVER (PARTITION BY Authority) AS Percentage
+FROM (
+	SELECT 
+		Authority,
+		Fire_Cause,
+		CASE WHEN
+		Fire_Cause = 'Unknown' THEN 'Without Cause' ELSE 'With Cause' END AS Result
+	FROM
+		Humberside
+	WHERE
+		Inc_Type = 'Fire') AS SubqueryAlias
+GROUP BY
+	Result, Authority
+
+
+
+--- Most popular Fire Causes v1
+SELECT
+	Fire_Cause Fire_Cause_v1,
+	COUNT(Fire_Cause) AS Cases
+FROM
+	Humberside
+WHERE
+	Fire_Cause != 'Unknown'
+GROUP BY
+	Fire_Cause
+ORDER BY
+	Cases DESC
+
+--- v2
+SELECT
+	Primary_Fire_Main_Cause Fire_Cause_v2,
+	COUNT(Primary_Fire_Main_Cause) AS Cases
+FROM
+	Humberside
+WHERE
+	Primary_Fire_Main_Cause != 'Unknown'
+GROUP BY
+	Primary_Fire_Main_Cause
+ORDER BY
+	Cases DESC;
+
+
+--- v3 by Description
+SELECT
+	FA_SS_Description_lvl_4 Description,
+	COUNT(FA_SS_Description_lvl_4) AS Cases
+FROM
+	Humberside
+WHERE
+	FA_SS_Description_lvl_4 != 'Unknown' AND
+	Inc_Type = 'Fire'
+GROUP BY
+	FA_SS_Description_lvl_4
+ORDER BY
+	Cases DESC
+
+
+---Temporal Patterns - Are there specific days or times of the week when fire incidents are more likely to occur?
+
+
+--- Total Accidents Per Year
+SELECT
+	Year,
+	COUNT(Year) Accidents_per_Year
+FROM
+	Humberside
+GROUP BY
+	Year
+ORDER BY
+	Accidents_per_year DESC;
+
+
+--- Total Accidents per Month
+SELECT
+	Month,
+	COUNT(Month) Accidents_per_month
+FROM
+	Humberside
+GROUP BY
+	Month
+ORDER BY
+	Accidents_per_month DESC;
+
+
+--- Total Accidents per Hour
+SELECT
+	Hour,
+	COUNT(Hour) Accidents_per_Hour
+FROM
+	Humberside
+GROUP BY
+	Hour
+ORDER BY
+	Accidents_per_Hour DESC;
+
+
+--- Incident Type Distribution - What is the distribution of incident types, and are there trends or patterns?
+
+SELECT TOP 1000 * FROM Humberside;
+
+--- Incident Type Distribution
+SELECT
+    Inc_Type,
+    Fire_Cause,
+    COUNT(*) AS Total_Incidents
+FROM
+    Humberside
+WHERE
+	Fire_Cause != 'Unknown'
+GROUP BY
+    Inc_Type, Fire_Cause
+ORDER BY
+    Total_Incidents DESC;
+
+--- Top Monthly Changes with Incident Type
+WITH IncidentTypeTrends AS (
+    SELECT
+        Inc_Type,
+        Year,
+        Month,
+        COUNT(*) AS Total_Incidents
+    FROM
+        Humberside
+    GROUP BY
+        Inc_Type, Year, Month
+)
+
+SELECT
+    Inc_Type,
+    Year,
+    Month,
+    Total_Incidents,
+    LAG(Total_Incidents) OVER (PARTITION BY Inc_Type ORDER BY Year, Month) AS Previous_Month_Count,
+    Total_Incidents - LAG(Total_Incidents) OVER (PARTITION BY Inc_Type ORDER BY Year, Month) AS Monthly_Change
+FROM
+    IncidentTypeTrends
+ORDER BY
+    Monthly_Change DESC;
+
+--- Ignition Sources - What are the most common sources of ignition leading to fire incidents?
+
+
+--- Ignition Source1
+SELECT
+	COUNT(Primary_Fire_Ignition_Source_De) Total_Fire_Incidents,
+	Primary_Fire_Ignition_Source_De IgnitionSource1
+FROM
+	Humberside
+WHERE
+	Primary_Fire_Ignition_Source_De NOT IN ('Unknown', 'Not Known')
+GROUP BY
+	Primary_Fire_Ignition_Source_De
+ORDER BY
+	Total_Fire_Incidents DESC;
+
+
+--- Ignition Source2
+SELECT
+	COUNT(Primary_Fire_Ignition_Source_Ca) Total_Fire_Incidents,
+	Primary_Fire_Ignition_Source_Ca IgnitionSource2
+FROM
+	Humberside
+WHERE
+	Primary_Fire_Ignition_Source_Ca NOT IN ('Unknown', 'Not Known')
+GROUP BY
+	Primary_Fire_Ignition_Source_Ca
+ORDER BY
+	Total_Fire_Incidents DESC;
+
+
