@@ -1,4 +1,4 @@
-# Fire-Incident-Analysis_Humberside
+# Humberside Incident & Fire Incident Analysis: Unveiling Trends and Patterns (Q3 2009 - Q3 2023)
 
 
 - ***Causes of Fire - What are the primary causes of fire incidents in the community?***
@@ -15,7 +15,7 @@ By identifying hotspots and understanding incident types the analysis contribute
 Dataset can be found under this link
 [Humberside Dataset](https://data-humbersidefrs.opendata.arcgis.com/search)
 
-
+![SS](https://github.com/kac123451/Fire-Incident-Analysis_Humberside/blob/main/1.png)
 
 
 **Dataset contains 36 columns and 175504 rows (4 816 651 records)**
@@ -58,7 +58,7 @@ While the dataset appears sorted, it contains some blank records that warrant at
 - Number of Columns: 27
 - Number of Rows: 175,504 (4,738,605 records)
 
-
+![SS](https://github.com/kac123451/Fire-Incident-Analysis_Humberside/blob/main/2.png)
 
 Analysis (SQL)
 
@@ -77,7 +77,7 @@ Key takeaways: [Visualisations](https://public.tableau.com/app/profile/kacper.sa
 - **Fire Ignition Sources**: The primary ignition sources were cooking appliances **3,505**, naked flames **2,452**, and vehicles **2,348** incidents.
 
 
-
+![SS](https://github.com/kac123451/Fire-Incident-Analysis_Humberside/blob/main/3.png)
 
 
 
