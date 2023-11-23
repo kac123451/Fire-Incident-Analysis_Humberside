@@ -77,7 +77,8 @@ Key takeaways: [Visualisations](https://public.tableau.com/app/profile/kacper.sa
 - **Fire Ignition Sources**: The primary ignition sources were cooking appliances **3,505**, naked flames **2,452**, and vehicles **2,348** incidents.
 
 
-![SS](https://github.com/kac123451/Fire-Incident-Analysis_Humberside/blob/main/3.png)
+![SS](https://github.com/kac123451/Fire-Incident-Analysis_Humberside/blob/main/ss1.png)
+![SS](https://github.com/kac123451/Fire-Incident-Analysis_Humberside/blob/main/ss2.png)
 
 
 
