@@ -60,7 +60,8 @@ While the dataset appears sorted, it contains some blank records that warrant at
 
 ![SS](https://github.com/kac123451/Fire-Incident-Analysis_Humberside/blob/main/2.png)
 
-Analysis (SQL)
+[SQL Analysis (SQL)](https://github.com/kac123451/Fire-Incident-Analysis_Humberside/blob/main/SQL)
+
 
 
 
